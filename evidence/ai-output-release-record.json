@@ -65,6 +65,7 @@
     "claim_evidence_paths": [
       "README.md",
       "evidence-datahub-roundtrip.json",
+      "docs/reviews/openai-build-week-adversarial-review.md",
       "https://docs.datahub.com/docs/api/tutorials/ml"
     ],
     "license_or_source_evidence": [
@@ -115,6 +116,7 @@
       "Browser CDP viewport 1920x911, button interaction verified, page_errors=[]",
       "DataHub SDK round-trip readback: REPAIR / LR-2842C6 and lineage_receipt_verdict=REPAIR",
       "Post-submission judge setup replay: python scripts/datahub_roundtrip.py --write-decision returned four URNs, three explicit REPAIR gaps, and DataHub property readback REPAIR / LR-2842C6",
+      "Cold-judge adversarial review artifact records resolved setup and dependency-drift findings plus the remaining session-ID semantic and competitive-outcome risks",
       "53.448980-second narrated H.264/AAC MP4 readback (under the 3-minute rule); YouTube F5peo6DJD3c public HTML readback: PUBLIC / PROCESSED",
       "OpenAI Devpost public readback: Project submitted!, Developer Tools, live demo link, GitHub link, and YouTube iframe F5peo6DJD3c"
     ],
