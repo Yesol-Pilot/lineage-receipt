@@ -117,7 +117,7 @@
       "DataHub SDK round-trip readback: REPAIR / LR-DC2240 and lineage_receipt_verdict=REPAIR",
       "Post-submission judge setup replay: python scripts/datahub_roundtrip.py --write-decision returned four URNs, three explicit REPAIR gaps, and DataHub property readback REPAIR / LR-DC2240",
       "Remote cold-start verification on Windows: npm ci, npm test 4/4, Vite build, npm audit 0 high vulnerabilities, and Python safety/fixture tests 3/3",
-      "Follow-up candidate 94a6cf3 makes the evidence navigation and Fit to view controls actionable; remote verification of this UI-only delta is pending",
+      "Candidate c7012bb preserves the actionable evidence navigation and Fit to view controls and adds cross-engine evidence-bound digest regression tests; remote verification is pending",
       "Cold-judge adversarial review artifact records resolved setup and dependency-drift findings plus the remaining session-ID semantic and competitive-outcome risks",
       "53.448980-second narrated H.264/AAC MP4 readback (under the 3-minute rule); YouTube F5peo6DJD3c public HTML readback: PUBLIC / PROCESSED",
       "OpenAI Devpost public readback: Project submitted!, Developer Tools, live demo link, GitHub link, and YouTube iframe F5peo6DJD3c"
