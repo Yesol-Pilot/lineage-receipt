@@ -110,7 +110,8 @@
       "npm test: 2/2 passed",
       "npm run build: Vite production build passed",
       "Browser CDP viewport 1920x911, button interaction verified, page_errors=[]",
-      "DataHub SDK round-trip readback: REPAIR / LR-2842C6 and lineage_receipt_verdict=REPAIR"
+      "DataHub SDK round-trip readback: REPAIR / LR-2842C6 and lineage_receipt_verdict=REPAIR",
+      "45-second MP4 demo readback (under the 3-minute rule) and YouTube content readback: 공개 / 게시됨"
     ],
     "independent_review_evidence": [
       "Codex final-validator review against current DataHub hackathon rules and AI-output release policy"
