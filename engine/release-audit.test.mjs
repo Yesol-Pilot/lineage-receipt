@@ -18,6 +18,9 @@ test('fails closed when feature freshness is missing, invalid, or absent', () =>
 test('committed DataHub fixture is produced by the release engine', () => {
   const fixture = JSON.parse(readFileSync(new URL('../evidence-datahub-roundtrip.json', import.meta.url), 'utf8'));
   assert.deepEqual(auditRelease(fixture.evidence, '2026-07-19'), fixture.receipt);
+  assert.equal(fixture.evidence.decisionWrite.readbackVerdict, fixture.receipt.verdict);
+  assert.equal(fixture.evidence.decisionWrite.readbackReceiptId, fixture.receipt.receiptId);
+  assert.equal(fixture.evidence.decisionWrite.readbackDigest, fixture.receipt.digest);
 });
 test('receipt digest binds the evidence snapshot, not only the gap labels', () => {
   const evidence = { model: 'm@1', nodes: [{ kind: 'FeatureSet', name: 'features', owner: 'data', freshness: '2026-06-01' }, { kind: 'MLModel', owner: null }], rollbackRunbook: null };

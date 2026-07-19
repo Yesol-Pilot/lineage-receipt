@@ -25,7 +25,7 @@ Review mode: cold-judge replay and evidence readback; the repaired candidate rec
 
 ### F1 — Python SDK setup ambiguity (resolved)
 
-The first public README assumed the judge already had the DataHub SDK. That was a realistic cold-start failure. The repair added `requirements.txt` with `acryl-datahub==1.6.0.15`, a venv install path, and the exact Quickstart/token/round-trip commands. The live replay returned four URNs, three explicit gaps, and `REPAIR / LR-DC2240` after the DataHub write-back.
+The first public README assumed the judge already had the DataHub SDK. That was a realistic cold-start failure. The repair added `requirements.txt` with `acryl-datahub==1.6.0.15`, a venv install path, and the exact Quickstart/token/round-trip commands. The live replay returned four URNs, three explicit gaps, and `REPAIR / LR-DC2240` after the DataHub write-back; the current round-trip fails closed if the persisted verdict, receipt ID, or digest differs from the computed receipt.
 
 ### F2 — JavaScript dependency drift (resolved)
 

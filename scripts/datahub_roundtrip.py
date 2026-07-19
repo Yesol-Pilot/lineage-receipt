@@ -295,7 +295,14 @@ def main() -> None:
             "customProperty": "lineage_receipt_verdict",
             "readbackVerdict": persisted_properties.get("lineage_receipt_verdict"),
             "readbackReceiptId": persisted_properties.get("lineage_receipt_id"),
+            "readbackDigest": persisted_properties.get("lineage_receipt_digest"),
         }
+        if (
+            evidence["decisionWrite"]["readbackVerdict"] != receipt["verdict"]
+            or evidence["decisionWrite"]["readbackReceiptId"] != receipt["receiptId"]
+            or evidence["decisionWrite"]["readbackDigest"] != receipt["digest"]
+        ):
+            raise RuntimeError("DataHub decision readback does not match the computed receipt")
     print(json.dumps({"evidence": evidence, "receipt": receipt}, ensure_ascii=False, separators=(",", ":")))
 
 

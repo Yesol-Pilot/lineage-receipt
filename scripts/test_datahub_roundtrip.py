@@ -29,6 +29,9 @@ class ReceiptSafetyTests(unittest.TestCase):
         with open("evidence-datahub-roundtrip.json", encoding="utf-8") as handle:
             fixture = json.load(handle)
         self.assertEqual(build_receipt(fixture["evidence"], "2026-07-19"), fixture["receipt"])
+        self.assertEqual(fixture["evidence"]["decisionWrite"]["readbackVerdict"], fixture["receipt"]["verdict"])
+        self.assertEqual(fixture["evidence"]["decisionWrite"]["readbackReceiptId"], fixture["receipt"]["receiptId"])
+        self.assertEqual(fixture["evidence"]["decisionWrite"]["readbackDigest"], fixture["receipt"]["digest"])
 
     def test_receipt_digest_binds_the_evidence_snapshot(self):
         evidence = {

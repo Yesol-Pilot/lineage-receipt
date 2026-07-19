@@ -61,7 +61,9 @@ For judges, the fastest path is:
 2. On the repaired candidate, inspect the four DataHub URNs and the `REPAIR / LR-DC2240` SHA-256 receipt. The public URL is updated only after the independent review and redeploy readback gates pass.
 3. Run `npm test` and `npm run build` locally.
 4. Run `python scripts/datahub_roundtrip.py --write-decision` against a local
-   DataHub Quickstart to reproduce the lineage read and decision write-back.
+   DataHub Quickstart to reproduce the lineage read and decision write-back;
+   the command fails if the persisted verdict, receipt ID, or SHA-256 digest
+   does not match the computed receipt.
 
 The Python safety/fixture tests can be run independently with
 `python scripts/test_datahub_roundtrip.py` after the pinned SDK install.
