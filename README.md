@@ -1,10 +1,10 @@
 # LineageReceipt
 
-An evidence-first ML release agent for the DataHub Agent Hackathon. It reads a model's DataHub lineage, blocks incomplete releases, produces a stable receipt, and is designed to write the decision provenance back to DataHub.
+An evidence-first ML release agent for OpenAI Build Week 2026 (Developer Tools), built with Codex and GPT-5.6. It reads a model's DataHub lineage, blocks incomplete releases, and produces a cryptographic SHA-256 digest over the canonical decision payload before writing decision provenance back to DataHub. The same public artifact was also prepared for the DataHub Agent Hackathon; this page makes the current OpenAI Build Week identity and evidence path explicit.
 
 ## Current proof
 
-`engine/release-audit.mjs` is a deterministic release rule engine. `scripts/datahub_roundtrip.py` uses the official DataHub SDK to upsert a synthetic ML graph, read its lineage, compute the same receipt, and persist the decision as ML model custom properties. No production credentials are stored in this repository.
+`engine/release-audit.mjs` is a deterministic release rule engine. `scripts/datahub_roundtrip.py` uses the official DataHub SDK to upsert a synthetic ML graph, read its lineage, compute the same SHA-256 digest over the canonical decision payload, and persist the decision as ML model custom properties. Missing or invalid freshness evidence fails closed as `REPAIR`; the committed fixture is covered by an engine-consistency test. No production credentials are stored in this repository.
 
 ## Run
 
@@ -16,13 +16,13 @@ npm test
 
 ## DataHub round-trip proof
 
-The browser UI runs with Node.js 20+; the round-trip adapter requires Python
+The browser UI runs with Node.js 20.19+ (or 22.12+); the round-trip adapter requires Python
 3.11+ and the pinned SDK in `requirements.txt`. From a clean checkout:
 
 ```bash
 python -m venv .venv
 # macOS/Linux: source .venv/bin/activate
-# Windows PowerShell: .venv\\Scripts\\Activate.ps1
+# Windows PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
@@ -58,10 +58,13 @@ approval.
 For judges, the fastest path is:
 
 1. Open the live demo at <https://016lineage-receipt.vercel.app>.
-2. Inspect the four DataHub URNs and the `REPAIR / LR-2842C6` receipt.
+2. Inspect the four DataHub URNs and the `REPAIR / LR-46633A` SHA-256 receipt.
 3. Run `npm test` and `npm run build` locally.
 4. Run `python scripts/datahub_roundtrip.py --write-decision` against a local
    DataHub Quickstart to reproduce the lineage read and decision write-back.
+
+The Python safety/fixture tests can be run independently with
+`python scripts/test_datahub_roundtrip.py` after the pinned SDK install.
 
 The fixture is synthetic and non-sensitive. The public repository is licensed
 under Apache-2.0.

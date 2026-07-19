@@ -2,17 +2,17 @@
 
 Review date: 2026-07-19  
 Scope: public LineageReceipt submission `1103953`  
-Review mode: cold-judge replay and evidence readback; independent Claude verdict is intentionally pending for the 20:00 KST review gate.
+Review mode: cold-judge replay and evidence readback; the first independent Claude review returned `REPAIR / 64`, and the four repair targets are being re-verified before re-review.
 
 ## Verdict
 
-`CONDITIONAL_PASS` for submission compliance and technical reproducibility. The project is submitted and editable until the deadline. Award strength is not self-certified: the next gate is an independent reviewer score followed by repair/re-review if needed.
+`CONDITIONAL_PASS` for submission compliance and technical reproducibility. The project is submitted and editable until the deadline. The first independent reviewer score was `REPAIR / 64`; award strength remains open until the repaired commit receives an independent `PASS`.
 
 ## Required-entry checks
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
-| Working project | [live demo](https://016lineage-receipt.vercel.app) renders the four-node DataHub chain and `REPAIR / LR-2842C6` | PASS |
+| Working project | [live demo](https://016lineage-receipt.vercel.app) renders the four-node DataHub chain and `REPAIR / LR-46633A` | PASS |
 | Public source and license | [GitHub repository](https://github.com/Yesol-Pilot/lineage-receipt), Apache-2.0 `LICENSE` | PASS |
 | Judge setup path | `README.md` plus pinned `requirements.txt` and npm lockfile | PASS |
 | Codex/GPT-5.6 explanation | README, project story, and narrated demo | PASS |
@@ -24,7 +24,7 @@ Review mode: cold-judge replay and evidence readback; independent Claude verdict
 
 ### F1 — Python SDK setup ambiguity (resolved)
 
-The first public README assumed the judge already had the DataHub SDK. That was a realistic cold-start failure. The repair added `requirements.txt` with `acryl-datahub==1.6.0.15`, a venv install path, and the exact Quickstart/token/round-trip commands. The live replay returned four URNs, three explicit gaps, and `REPAIR / LR-2842C6` after the DataHub write-back.
+The first public README assumed the judge already had the DataHub SDK. That was a realistic cold-start failure. The repair added `requirements.txt` with `acryl-datahub==1.6.0.15`, a venv install path, and the exact Quickstart/token/round-trip commands. The live replay returned four URNs, three explicit gaps, and `REPAIR / LR-46633A` after the DataHub write-back.
 
 ### F2 — JavaScript dependency drift (resolved)
 
@@ -37,6 +37,10 @@ The required field is populated with the Codex thread ID used for the project wo
 ### F4 — Competitive outcome (open)
 
 Technical compliance is not a prize guarantee. The independent Claude review must score problem sharpness, visible differentiation, demo pacing, and judge confidence. Any `REPAIR` finding becomes the next repair target before the final readback.
+
+### F5 — Independent Claude repair targets (in progress)
+
+The first independent review identified fail-open freshness handling, a misleading padded FNV-1a digest, missing fixture-to-engine binding, and stale dual-hackathon/video identity text. The local repair changes fail closed on freshness, use SHA-256 in both engines, add a fixture-consistency test, and reconcile README/evidence metadata. Re-review is required before any public push or deployment.
 
 ## Evidence commands
 

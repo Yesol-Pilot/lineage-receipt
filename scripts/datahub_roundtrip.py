@@ -8,6 +8,7 @@ DATAHUB_GMS_TOKEN) for both writes and reads.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import warnings
 from datetime import datetime, timezone
@@ -42,17 +43,16 @@ RUN_ID = "lineage-receipt-training-20260719"
 
 
 def stable_fingerprint(value: str) -> str:
-    """Match engine/release-audit.mjs for the ASCII receipt payload."""
-    hash_value = 0x811C9DC5
-    for char in value:
-        hash_value ^= ord(char)
-        hash_value = (hash_value * 0x01000193) & 0xFFFFFFFF
-    return f"{hash_value:08x}" * 8
+    """Match engine/release-audit.mjs with a cryptographic receipt digest."""
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
-def days_between(start: str, end: str) -> int:
-    first = datetime.fromisoformat(start).date()
-    last = datetime.fromisoformat(end).date()
+def days_between(start: str | None, end: str | None) -> int | None:
+    try:
+        first = datetime.fromisoformat((start or "").replace("Z", "+00:00")).date()
+        last = datetime.fromisoformat((end or "").replace("Z", "+00:00")).date()
+    except (TypeError, ValueError):
+        return None
     return (last - first).days
 
 
@@ -207,11 +207,15 @@ def read_evidence(client: DataHubClient, input_dataset: Dataset, feature_dataset
 
 def build_receipt(evidence: dict[str, Any], today: str) -> dict[str, Any]:
     gaps: list[dict[str, str]] = []
-    model = next(node for node in evidence["nodes"] if node["kind"] == "MLModel")
-    feature = next(node for node in evidence["nodes"] if node["kind"] == "FeatureSet")
-    if not model.get("owner"):
+    nodes = evidence.get("nodes") or []
+    model = next((node for node in nodes if node.get("kind") == "MLModel"), None)
+    feature = next((node for node in nodes if node.get("kind") == "FeatureSet"), None)
+    if not model or not model.get("owner"):
         gaps.append({"id": "missing-owner", "title": "Missing owner", "detail": f"{evidence['model']} has no owner recorded in DataHub."})
-    if feature.get("freshness") and days_between(feature["freshness"], today) > 7:
+    freshness_age = days_between(feature.get("freshness") if feature else None, today)
+    if freshness_age is None:
+        gaps.append({"id": "missing-freshness", "title": "Missing freshness evidence", "detail": "Feature set freshness is missing or invalid in DataHub."})
+    elif freshness_age > 7:
         gaps.append({"id": "stale-feature", "title": "Stale feature freshness", "detail": f"Feature set freshness is {feature['freshness']}; it is older than 7 days."})
     if not evidence.get("rollbackRunbook"):
         gaps.append({"id": "no-rollback", "title": "No rollback runbook", "detail": "No rollback runbook is linked to the production deployment."})

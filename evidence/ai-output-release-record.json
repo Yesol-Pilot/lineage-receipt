@@ -1,11 +1,11 @@
 {
   "schema": "neo.ai_output_release_record.v1",
   "artifact_id": "lineage-receipt-v0.1.0",
-  "artifact_path_or_url": "D:/00.test/002.products-sbu/016.lineage-receipt",
+  "artifact_path_or_url": ".",
   "artifact_class": "ui_and_code",
   "exposure_class": "public",
   "audience_and_territories": [
-    "DataHub Agent Hackathon judges and Devpost visitors worldwide",
+    "OpenAI Build Week 2026 Developer Tools judges, DataHub Agent Hackathon judges, and Devpost visitors worldwide",
     "Korea and United States platform audiences"
   ],
   "creative_intent": {
@@ -34,7 +34,7 @@
       "Browser runtime readback and source audit"
     ],
     "source_or_reference_paths": [
-      "C:/Users/yesol/.codex/generated_images/019f6f06-9f9a-7042-a4be-9292df9fb7cf/exec-6e686c74-0f06-4b3e-8b02-630e3803b081.png",
+      "internal generated visual concept reference (not shipped)",
       "https://docs.datahub.com/docs/api/tutorials/ml",
       "https://datahub.devpost.com/rules"
     ]
@@ -53,11 +53,11 @@
     ],
     "final_readback_evidence": [
       "evidence-datahub-roundtrip.json",
-      "D:/00.test/010.tmp-output/001.codex-tmp/lineage-receipt-local-20260719.png",
+      "local rendered UI screenshot (internal evidence)",
       "Browser CDP runtime at http://127.0.0.1:4194 with zero page errors",
       "https://016lineage-receipt.vercel.app",
       "https://github.com/Yesol-Pilot/lineage-receipt",
-      "https://youtu.be/izCmOC4tS3w",
+      "https://youtu.be/F5peo6DJD3c",
       "https://devpost.com/software/lineagereceipt"
     ]
   },
@@ -95,7 +95,7 @@
       "2026-07-19: https://openai.devpost.com/"
     ],
     "contract_or_client_requirements": [
-      "DataHub hackathon requires public Apache-2.0 source and a demo video; no additional AI-label requirement was found in the current rules."
+      "OpenAI Build Week 2026 Developer Tools and DataHub Agent Hackathon entries require a public source and a demo video; no additional AI-label requirement was found in the current rules."
     ],
     "material_deception_risk": "Low: the artifact is an explicitly synthetic code fixture and does not depict a real person, event, endorsement, or production release approval.",
     "decision": "NOT_REQUIRED_NO_PUBLIC_LABEL",
@@ -107,23 +107,27 @@
     "medium_specific_checklist": [
       "Product-specific lineage-to-decision hierarchy verified in the rendered UI.",
       "No placeholder data in the proof fixture; all nodes carry DataHub URNs.",
-      "Deterministic JS and Python receipts match digest LR-2842C6.",
+      "Deterministic JS and Python receipts match the SHA-256 digest and receipt ID LR-46633A.",
       "Full Apache-2.0 text present; no token, password, or private-key material found in source."
     ],
     "render_playback_device_or_runtime_evidence": [
       "npm test: 2/2 passed",
       "npm run build: Vite production build passed",
       "Browser CDP viewport 1920x911, button interaction verified, page_errors=[]",
-      "DataHub SDK round-trip readback: REPAIR / LR-2842C6 and lineage_receipt_verdict=REPAIR",
-      "Post-submission judge setup replay: python scripts/datahub_roundtrip.py --write-decision returned four URNs, three explicit REPAIR gaps, and DataHub property readback REPAIR / LR-2842C6",
+      "DataHub SDK round-trip readback: REPAIR / LR-46633A and lineage_receipt_verdict=REPAIR",
+      "Post-submission judge setup replay: python scripts/datahub_roundtrip.py --write-decision returned four URNs, three explicit REPAIR gaps, and DataHub property readback REPAIR / LR-46633A",
+      "Remote cold-start verification on Windows: npm ci, npm test 4/4, Vite build, npm audit 0 high vulnerabilities, and Python safety/fixture tests 3/3",
       "Cold-judge adversarial review artifact records resolved setup and dependency-drift findings plus the remaining session-ID semantic and competitive-outcome risks",
       "53.448980-second narrated H.264/AAC MP4 readback (under the 3-minute rule); YouTube F5peo6DJD3c public HTML readback: PUBLIC / PROCESSED",
       "OpenAI Devpost public readback: Project submitted!, Developer Tools, live demo link, GitHub link, and YouTube iframe F5peo6DJD3c"
     ],
     "independent_review_evidence": [
-      "Codex final-validator review against current DataHub hackathon rules and AI-output release policy"
+      "Codex final-validator review against current DataHub hackathon rules and AI-output release policy",
+      "ClaudeNeo independent review stdout preserved at D:/00.test/010.tmp-output/claudeneo-reviews/lineage-receipt-independent-review-correct-20260719-170309.txt: REPAIR / 64; four repair targets applied locally, re-review pending"
     ],
-    "remaining_defects": []
+    "remaining_defects": [
+      "Re-review the repaired local commit before public push/deploy; current public demo still reflects the superseded digest until that gate passes."
+    ]
   },
   "openai_build_week_submission": {
     "hackathon": "OpenAI Build Week 2026",
@@ -143,5 +147,5 @@
       "Additional info readback retained Individual / Korea Republic of / Developer Tools / repo / live demo / feedback session ID / install and test path"
     ]
   },
-  "verdict": "PASS"
+  "verdict": "REPAIR"
 }
