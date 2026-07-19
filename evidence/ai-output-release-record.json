@@ -88,7 +88,9 @@
     ],
     "platform_policy_sources_checked_at_release": [
       "2026-07-19: https://datahub.devpost.com/rules",
-      "2026-07-19: https://datahub.devpost.com/"
+      "2026-07-19: https://datahub.devpost.com/",
+      "2026-07-19: https://openai.devpost.com/rules",
+      "2026-07-19: https://openai.devpost.com/"
     ],
     "contract_or_client_requirements": [
       "DataHub hackathon requires public Apache-2.0 source and a demo video; no additional AI-label requirement was found in the current rules."
@@ -111,12 +113,31 @@
       "npm run build: Vite production build passed",
       "Browser CDP viewport 1920x911, button interaction verified, page_errors=[]",
       "DataHub SDK round-trip readback: REPAIR / LR-2842C6 and lineage_receipt_verdict=REPAIR",
-      "45-second MP4 demo readback (under the 3-minute rule) and YouTube content readback: 공개 / 게시됨"
+      "53.448980-second narrated H.264/AAC MP4 readback (under the 3-minute rule); YouTube F5peo6DJD3c public HTML readback: PUBLIC / PROCESSED",
+      "OpenAI Devpost public readback: Project submitted!, Developer Tools, live demo link, GitHub link, and YouTube iframe F5peo6DJD3c"
     ],
     "independent_review_evidence": [
       "Codex final-validator review against current DataHub hackathon rules and AI-output release policy"
     ],
     "remaining_defects": []
+  },
+  "openai_build_week_submission": {
+    "hackathon": "OpenAI Build Week 2026",
+    "submission_url": "https://devpost.com/software/lineagereceipt",
+    "submission_status": "SUBMITTED",
+    "submission_id": "1103953",
+    "track": "Developer Tools",
+    "public_repo": "https://github.com/Yesol-Pilot/lineage-receipt",
+    "live_demo": "https://016lineage-receipt.vercel.app",
+    "video": "https://youtu.be/F5peo6DJD3c",
+    "video_duration_seconds": 53.448980,
+    "codex_feedback_session_id": "019f6f06-9f9a-7042-a4be-9292df9fb7cf",
+    "readback_evidence": [
+      "Devpost finalization readback displayed Project submitted!",
+      "Public project page embedded https://www.youtube.com/embed/F5peo6DJD3c",
+      "Public project page exposed https://016lineage-receipt.vercel.app and the Apache-2.0 repository",
+      "Additional info readback retained Individual / Korea Republic of / Developer Tools / repo / live demo / feedback session ID / install and test path"
+    ]
   },
   "verdict": "PASS"
 }

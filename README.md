@@ -28,3 +28,24 @@ run, deployment job, deterministic receipt, and the write-back property. The
 fixture is synthetic and contains no personal or production data.
 
 Licensed under Apache-2.0.
+
+## OpenAI Build Week provenance
+
+LineageReceipt is a developer tool built during the July 2026 OpenAI Build Week
+submission period with Codex and GPT-5.6. Codex drove the
+implementation loop, browser readback, and regression checks; GPT-5.6 was used
+for product framing, rule design, and adversarial review of the evidence
+boundary. The key design decision was to keep `REPAIR` visible when owner,
+freshness, or rollback evidence is missing instead of manufacturing an
+approval.
+
+For judges, the fastest path is:
+
+1. Open the live demo at <https://016lineage-receipt.vercel.app>.
+2. Inspect the four DataHub URNs and the `REPAIR / LR-2842C6` receipt.
+3. Run `npm test` and `npm run build` locally.
+4. Run `python scripts/datahub_roundtrip.py --write-decision` against a local
+   DataHub Quickstart to reproduce the lineage read and decision write-back.
+
+The fixture is synthetic and non-sensitive. The public repository is licensed
+under Apache-2.0.
