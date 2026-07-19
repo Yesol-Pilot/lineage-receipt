@@ -1,0 +1,119 @@
+{
+  "schema": "neo.ai_output_release_record.v1",
+  "artifact_id": "lineage-receipt-v0.1.0",
+  "artifact_path_or_url": "D:/00.test/002.products-sbu/016.lineage-receipt",
+  "artifact_class": "ui_and_code",
+  "exposure_class": "public",
+  "audience_and_territories": [
+    "DataHub Agent Hackathon judges and Devpost visitors worldwide",
+    "Korea and United States platform audiences"
+  ],
+  "creative_intent": {
+    "purpose": "Make ML release readiness legible by reading DataHub lineage, blocking incomplete evidence, and recording a deterministic decision receipt.",
+    "audience": "Data and ML platform engineers evaluating production release evidence.",
+    "voice_or_art_direction": "Graphite-and-cobalt evidence console with a compact three-column lineage-to-decision hierarchy.",
+    "deliberate_distinctive_choices": [
+      "The product surface centers a four-node lineage chain and a right-rail REPAIR verdict instead of a generic dashboard grid.",
+      "Every decision shows the exact URN, evidence gap, stable digest, and DataHub write-back property.",
+      "The demo fixture is synthetic and intentionally exposes three repair gaps rather than claiming a false approval."
+    ],
+    "directions_explored": [
+      "Generated a visual concept for a DataHub lineage evidence console, then implemented the information architecture in product code.",
+      "Selected a deterministic REPAIR-first demo state so the judge can see the safety boundary in one pass."
+    ]
+  },
+  "ai_assistance_internal_provenance": {
+    "tools_or_models": [
+      "Codex GPT-5.6 as main orchestrator and final validator",
+      "OpenAI image generation for the internal visual concept reference"
+    ],
+    "generation_or_edit_stages": [
+      "Concept exploration",
+      "React/Vite implementation",
+      "DataHub SDK integration",
+      "Browser runtime readback and source audit"
+    ],
+    "source_or_reference_paths": [
+      "C:/Users/yesol/.codex/generated_images/019f6f06-9f9a-7042-a4be-9292df9fb7cf/exec-6e686c74-0f06-4b3e-8b02-630e3803b081.png",
+      "https://docs.datahub.com/docs/api/tutorials/ml",
+      "https://datahub.devpost.com/rules"
+    ]
+  },
+  "human_accountability": {
+    "compatibility_note": "Responsible editor is the authorized agent final validator; no exact external rule currently requires a separate human actor for this code submission.",
+    "responsible_editor": "Codex (authorized agent final validator) on behalf of the owner",
+    "review_route": "AGENT_FINAL_VALIDATOR",
+    "external_human_action_required": false,
+    "external_human_action_basis": "No human-only action identified in the current DataHub hackathon rules for a code/UI entry.",
+    "reviewed_at": "2026-07-19T13:20:00+09:00",
+    "material_edits_or_acceptance_rationale": [
+      "Replaced static mock evidence with a real local DataHub SDK round-trip fixture.",
+      "Kept REPAIR as the visible verdict because owner, freshness, and rollback evidence are intentionally absent.",
+      "Added full Apache-2.0 license text and removed credentials from repository content."
+    ],
+    "final_readback_evidence": [
+      "evidence-datahub-roundtrip.json",
+      "D:/00.test/010.tmp-output/001.codex-tmp/lineage-receipt-local-20260719.png",
+      "Browser CDP runtime at http://127.0.0.1:4194 with zero page errors"
+    ]
+  },
+  "facts_rights_and_consent": {
+    "claim_evidence_paths": [
+      "README.md",
+      "evidence-datahub-roundtrip.json",
+      "https://docs.datahub.com/docs/api/tutorials/ml"
+    ],
+    "license_or_source_evidence": [
+      "LICENSE (Apache License 2.0)",
+      "package-lock.json dependency lockfile",
+      "https://www.apache.org/licenses/LICENSE-2.0.txt"
+    ],
+    "likeness_or_voice_consent_evidence": [],
+    "open_issues": []
+  },
+  "disclosure_assessment": {
+    "actor_role": "Ordinary AI-assisted tool user and editor submitting an open-source code/UI project.",
+    "jurisdictions_checked": [
+      "Korea",
+      "United States / Devpost platform",
+      "EU baseline for future public exposure"
+    ],
+    "official_legal_sources_checked_at_release": [
+      "2026-07-19: https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0031&lsiSeq=282791&urlMode=lsScJoRltInfoR",
+      "2026-07-19: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng"
+    ],
+    "platform_policy_sources_checked_at_release": [
+      "2026-07-19: https://datahub.devpost.com/rules",
+      "2026-07-19: https://datahub.devpost.com/"
+    ],
+    "contract_or_client_requirements": [
+      "DataHub hackathon requires public Apache-2.0 source and a demo video; no additional AI-label requirement was found in the current rules."
+    ],
+    "material_deception_risk": "Low: the artifact is an explicitly synthetic code fixture and does not depict a real person, event, endorsement, or production release approval.",
+    "decision": "NOT_REQUIRED_NO_PUBLIC_LABEL",
+    "decision_rationale": "The public artifact is code/UI with a synthetic DataHub fixture, not realistic synthetic media or a materially misleading claim. Internal AI provenance is retained in this record and README evidence boundaries remain explicit.",
+    "public_label_or_control_applied": "No extra public AI label; Apache-2.0 license and truthful synthetic-fixture disclosure remain visible.",
+    "machine_readable_provenance": "evidence/ai-output-release-record.json"
+  },
+  "quality_evidence": {
+    "medium_specific_checklist": [
+      "Product-specific lineage-to-decision hierarchy verified in the rendered UI.",
+      "No placeholder data in the proof fixture; all nodes carry DataHub URNs.",
+      "Deterministic JS and Python receipts match digest LR-2842C6.",
+      "Full Apache-2.0 text present; no token, password, or private-key material found in source."
+    ],
+    "render_playback_device_or_runtime_evidence": [
+      "npm test: 2/2 passed",
+      "npm run build: Vite production build passed",
+      "Browser CDP viewport 1920x911, button interaction verified, page_errors=[]",
+      "DataHub SDK round-trip readback: REPAIR / LR-2842C6 and lineage_receipt_verdict=REPAIR"
+    ],
+    "independent_review_evidence": [
+      "Codex final-validator review against current DataHub hackathon rules and AI-output release policy"
+    ],
+    "remaining_defects": [
+      "Public GitHub and Devpost URLs are not yet recorded; release write remains gated until the repository is pushed and platform readback is captured."
+    ]
+  },
+  "verdict": "PASS"
+}

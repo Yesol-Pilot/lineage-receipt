@@ -1,12 +1,13 @@
 {
   "name": "lineage-receipt",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "node --test"
+    "test": "node --test",
+    "datahub:roundtrip": "python scripts/datahub_roundtrip.py --write-decision"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
