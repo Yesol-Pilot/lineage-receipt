@@ -2,17 +2,18 @@
 
 Review date: 2026-07-19  
 Scope: public LineageReceipt submission `1103953`  
-Review mode: cold-judge replay and evidence readback; the first independent Claude review returned `REPAIR / 64`, and the four repair targets are being re-verified before re-review.
+Review mode: cold-judge replay and evidence readback; the repaired candidate received `REPAIR / 82` because public redeploy/readback is still pending.
 
 ## Verdict
 
-`CONDITIONAL_PASS` for submission compliance and technical reproducibility. The project is submitted and editable until the deadline. The first independent reviewer score was `REPAIR / 64`; award strength remains open until the repaired commit receives an independent `PASS`.
+`CONDITIONAL_PASS` for submission compliance and technical reproducibility. The project is submitted and editable until the deadline. The repaired local candidate scored `82`; public push/deploy/readback remains a separate gated step before a final award-strength `PASS`.
 
 ## Required-entry checks
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
-| Working project | [live demo](https://016lineage-receipt.vercel.app) renders the four-node DataHub chain and `REPAIR / LR-46633A` | PASS |
+| Repaired candidate | Local `be68bff` renders the four-node DataHub chain and `REPAIR / LR-46633A` | PASS_CANDIDATE |
+| Public demo readback | [live demo](https://016lineage-receipt.vercel.app) remains on the superseded pre-repair `LR-2842C6` until the independent PASS gate | PENDING_REDEPLOY |
 | Public source and license | [GitHub repository](https://github.com/Yesol-Pilot/lineage-receipt), Apache-2.0 `LICENSE` | PASS |
 | Judge setup path | `README.md` plus pinned `requirements.txt` and npm lockfile | PASS |
 | Codex/GPT-5.6 explanation | README, project story, and narrated demo | PASS |
@@ -40,7 +41,7 @@ Technical compliance is not a prize guarantee. The independent Claude review mus
 
 ### F5 — Independent Claude repair targets (in progress)
 
-The first independent review identified fail-open freshness handling, a misleading padded FNV-1a digest, missing fixture-to-engine binding, and stale dual-hackathon/video identity text. The local repair changes fail closed on freshness, use SHA-256 in both engines, add a fixture-consistency test, and reconcile README/evidence metadata. Re-review is required before any public push or deployment.
+The first independent review identified fail-open freshness handling, a misleading padded FNV-1a digest, missing fixture-to-engine binding, and stale dual-hackathon/video identity text. The local repair changes fail closed on freshness, use SHA-256 in both engines, add a fixture-consistency test, and reconcile README/evidence metadata. The second independent review closed those code blockers; public push/deploy/readback remains explicitly pending.
 
 ## Evidence commands
 

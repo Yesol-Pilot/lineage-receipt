@@ -111,7 +111,7 @@
       "Full Apache-2.0 text present; no token, password, or private-key material found in source."
     ],
     "render_playback_device_or_runtime_evidence": [
-      "npm test: 2/2 passed",
+      "npm test: 4/4 passed on the repaired candidate",
       "npm run build: Vite production build passed",
       "Browser CDP viewport 1920x911, button interaction verified, page_errors=[]",
       "DataHub SDK round-trip readback: REPAIR / LR-46633A and lineage_receipt_verdict=REPAIR",
@@ -123,7 +123,7 @@
     ],
     "independent_review_evidence": [
       "Codex final-validator review against current DataHub hackathon rules and AI-output release policy",
-      "ClaudeNeo independent review stdout preserved at D:/00.test/010.tmp-output/claudeneo-reviews/lineage-receipt-independent-review-correct-20260719-170309.txt: REPAIR / 64; four repair targets applied locally, re-review pending"
+      "ClaudeNeo independent re-review transcript preserved internally: REPAIR / 82; code blockers closed and public redeploy/readback pending"
     ],
     "remaining_defects": [
       "Re-review the repaired local commit before public push/deploy; current public demo still reflects the superseded digest until that gate passes."

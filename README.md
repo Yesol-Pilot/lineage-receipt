@@ -58,7 +58,7 @@ approval.
 For judges, the fastest path is:
 
 1. Open the live demo at <https://016lineage-receipt.vercel.app>.
-2. Inspect the four DataHub URNs and the `REPAIR / LR-46633A` SHA-256 receipt.
+2. On the repaired candidate, inspect the four DataHub URNs and the `REPAIR / LR-46633A` SHA-256 receipt. The public URL is updated only after the independent review and redeploy readback gates pass.
 3. Run `npm test` and `npm run build` locally.
 4. Run `python scripts/datahub_roundtrip.py --write-decision` against a local
    DataHub Quickstart to reproduce the lineage read and decision write-back.
