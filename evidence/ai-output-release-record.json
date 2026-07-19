@@ -54,7 +54,11 @@
     "final_readback_evidence": [
       "evidence-datahub-roundtrip.json",
       "D:/00.test/010.tmp-output/001.codex-tmp/lineage-receipt-local-20260719.png",
-      "Browser CDP runtime at http://127.0.0.1:4194 with zero page errors"
+      "Browser CDP runtime at http://127.0.0.1:4194 with zero page errors",
+      "https://016lineage-receipt.vercel.app",
+      "https://github.com/Yesol-Pilot/lineage-receipt",
+      "https://youtu.be/izCmOC4tS3w",
+      "https://devpost.com/software/lineagereceipt"
     ]
   },
   "facts_rights_and_consent": {
@@ -111,9 +115,7 @@
     "independent_review_evidence": [
       "Codex final-validator review against current DataHub hackathon rules and AI-output release policy"
     ],
-    "remaining_defects": [
-      "Public GitHub and Devpost URLs are not yet recorded; release write remains gated until the repository is pushed and platform readback is captured."
-    ]
+    "remaining_defects": []
   },
   "verdict": "PASS"
 }
