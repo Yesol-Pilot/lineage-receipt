@@ -111,11 +111,12 @@
       "Full Apache-2.0 text present; no token, password, or private-key material found in source."
     ],
     "render_playback_device_or_runtime_evidence": [
-      "npm test: 4/4 passed on the repaired candidate",
+      "npm test: 5/5 passed at HEAD f28ef46; stdout preserved in D:\\00.test\\010.tmp-output\\lineagereceipt-verification\\f28ef46-npm-test.txt",
       "npm run build: Vite production build passed",
       "Browser CDP viewport 1920x911, button interaction verified, page_errors=[]",
-      "Fixture and local JS/Python engines produce REPAIR / LR-DC2240; the round-trip command now checks persisted verdict, receipt ID, and digest equality",
-      "Prior DataHub replay proved four URNs and three explicit REPAIR gaps; a fresh SDK round-trip for LR-DC2240 is pending remote verification before public redeploy",
+      "Python safety/fixture tests: 4/4 passed at HEAD f28ef46; stdout preserved in D:\\00.test\\010.tmp-output\\lineagereceipt-verification\\f28ef46-python-test.txt",
+      "Fresh local healthy DataHub Quickstart round-trip at HEAD f28ef46: four URNs, three explicit REPAIR gaps, LR-DC2240, readbackDigest equality, exit 0; stdout preserved in D:\\00.test\\010.tmp-output\\lineagereceipt-verification\\f28ef46-datahub-roundtrip.txt",
+      "Vite build and npm audit at HEAD f28ef46 passed; logs preserved in the lineagereceipt-verification folder",
       "Remote cold-start verification on Windows: npm ci, npm test 4/4, Vite build, npm audit 0 high vulnerabilities, and Python safety/fixture tests 3/3",
       "Candidate c7012bb preserves the actionable evidence navigation and Fit to view controls and adds cross-engine evidence-bound digest regression tests; remote verification is pending",
       "Cold-judge adversarial review artifact records resolved setup and dependency-drift findings plus the remaining session-ID semantic and competitive-outcome risks",
@@ -124,10 +125,10 @@
     ],
     "independent_review_evidence": [
       "Codex final-validator review against current DataHub hackathon rules and AI-output release policy",
-      "ClaudeNeo independent re-review transcript preserved internally: REPAIR / 82; code blockers closed and public redeploy/readback pending"
+      "ClaudeNeo independent re-review transcript preserved internally: PASS / 85 with no blockers; stdout at D:\\00.test\\010.tmp-output\\claudeneo-reviews\\lineage-receipt-independent-re-review3-20260719-215003.txt"
     ],
     "remaining_defects": [
-      "Freshly verify the c835eb1 DataHub round-trip and independent Claude verdict before public push/deploy; current public demo still reflects the superseded digest until those gates pass."
+      "Push f28ef46, redeploy the live demo, refresh the demo video/receipt identity, and complete GitHub/Vercel/YouTube/Devpost public readback; current public artifacts still reflect the superseded baseline."
     ]
   },
   "openai_build_week_submission": {
@@ -148,5 +149,5 @@
       "Additional info readback retained Individual / Korea Republic of / Developer Tools / repo / live demo / feedback session ID / install and test path"
     ]
   },
-  "verdict": "REPAIR"
+  "verdict": "PASS_CANDIDATE"
 }
