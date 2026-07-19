@@ -16,6 +16,17 @@ npm test
 
 ## DataHub round-trip proof
 
+The browser UI runs with Node.js 20+; the round-trip adapter requires Python
+3.11+ and the pinned SDK in `requirements.txt`. From a clean checkout:
+
+```bash
+python -m venv .venv
+# macOS/Linux: source .venv/bin/activate
+# Windows PowerShell: .venv\\Scripts\\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
 Start a DataHub Quickstart instance, then initialize the CLI token outside this
 repository (`datahub init --username datahub --password datahub`) and run:
 
@@ -26,6 +37,11 @@ python scripts/datahub_roundtrip.py --write-decision
 The command prints JSON containing the DataHub input/output URNs, model training
 run, deployment job, deterministic receipt, and the write-back property. The
 fixture is synthetic and contains no personal or production data.
+
+The supported judge path is a local DataHub Quickstart on a modern desktop
+browser with Docker available. No account credentials are needed for the
+synthetic fixture; the CLI token is stored in the user's local DataHub config,
+never in this repository.
 
 Licensed under Apache-2.0.
 

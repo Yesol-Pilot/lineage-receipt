@@ -70,6 +70,7 @@
     "license_or_source_evidence": [
       "LICENSE (Apache License 2.0)",
       "package-lock.json dependency lockfile",
+      "requirements.txt pins acryl-datahub==1.6.0.15",
       "https://www.apache.org/licenses/LICENSE-2.0.txt"
     ],
     "likeness_or_voice_consent_evidence": [],
