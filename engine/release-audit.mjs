@@ -11,7 +11,7 @@ export function auditRelease(evidence, today) {
   if (freshnessAge === null) gaps.push({ id: 'missing-freshness', title: 'Missing freshness evidence', detail: 'Feature set freshness is missing or invalid in DataHub.' });
   else if (freshnessAge > 7) gaps.push({ id: 'stale-feature', title: 'Stale feature freshness', detail: `Feature set freshness is ${feature.freshness}; it is older than 7 days.` });
   if (!evidence.rollbackRunbook) gaps.push({ id: 'no-rollback', title: 'No rollback runbook', detail: 'No rollback runbook is linked to the production deployment.' });
-  const canonical = JSON.stringify({ model: evidence.model, gaps: gaps.map((gap) => gap.id) });
+  const canonical = JSON.stringify(canonicalPayload(evidence, gaps.map((gap) => gap.id)));
   const digest = stableFingerprint(canonical);
   return { verdict: gaps.length ? 'REPAIR' : 'APPROVE', gaps, digest, receiptId: `LR-${digest.slice(0, 6).toUpperCase()}` };
 }
@@ -23,4 +23,30 @@ function daysBetween(from, to) {
 }
 function stableFingerprint(value) {
   return createHash('sha256').update(value, 'utf8').digest('hex');
+}
+
+function canonicalPayload(evidence, gapIds) {
+  const nodes = (evidence.nodes ?? []).map((node) => ({
+    kind: node?.kind ?? null,
+    name: node?.name ?? null,
+    urn: node?.urn ?? null,
+    owner: node?.owner ?? null,
+    freshness: node?.freshness ?? null,
+    state: node?.state ?? null,
+  }));
+  const rawLineage = evidence.lineage;
+  const lineage = rawLineage ? {
+    runUrn: rawLineage.runUrn ?? null,
+    inputs: rawLineage.inputs ?? [],
+    outputs: rawLineage.outputs ?? [],
+    modelTrainingJobs: rawLineage.modelTrainingJobs ?? [],
+    modelDeployments: rawLineage.modelDeployments ?? [],
+  } : null;
+  return {
+    model: evidence.model ?? null,
+    nodes,
+    rollbackRunbook: evidence.rollbackRunbook ?? null,
+    lineage,
+    gaps: gapIds,
+  };
 }

@@ -30,6 +30,16 @@ class ReceiptSafetyTests(unittest.TestCase):
             fixture = json.load(handle)
         self.assertEqual(build_receipt(fixture["evidence"], "2026-07-19"), fixture["receipt"])
 
+    def test_receipt_digest_binds_the_evidence_snapshot(self):
+        evidence = {
+            "model": "m@1",
+            "nodes": [{"kind": "FeatureSet", "name": "features", "owner": "data", "freshness": "2026-06-01"}, {"kind": "MLModel", "owner": None}],
+            "rollbackRunbook": None,
+        }
+        changed = json.loads(json.dumps(evidence))
+        changed["nodes"][0]["owner"] = "another-team"
+        self.assertNotEqual(build_receipt(evidence, "2026-07-19")["digest"], build_receipt(changed, "2026-07-19")["digest"])
+
 
 if __name__ == "__main__":
     unittest.main()

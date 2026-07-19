@@ -19,3 +19,9 @@ test('committed DataHub fixture is produced by the release engine', () => {
   const fixture = JSON.parse(readFileSync(new URL('../evidence-datahub-roundtrip.json', import.meta.url), 'utf8'));
   assert.deepEqual(auditRelease(fixture.evidence, '2026-07-19'), fixture.receipt);
 });
+test('receipt digest binds the evidence snapshot, not only the gap labels', () => {
+  const evidence = { model: 'm@1', nodes: [{ kind: 'FeatureSet', name: 'features', owner: 'data', freshness: '2026-06-01' }, { kind: 'MLModel', owner: null }], rollbackRunbook: null };
+  const changed = structuredClone(evidence);
+  changed.nodes[0].owner = 'another-team';
+  assert.notEqual(auditRelease(evidence, '2026-07-19').digest, auditRelease(changed, '2026-07-19').digest);
+});

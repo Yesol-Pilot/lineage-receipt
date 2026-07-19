@@ -47,6 +47,39 @@ def stable_fingerprint(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
+def canonical_payload(evidence: dict[str, Any], gap_ids: list[str]) -> dict[str, Any]:
+    """Bind a receipt to the evidence snapshot, not only to its gap labels."""
+    nodes = []
+    for node in evidence.get("nodes") or []:
+        nodes.append(
+            {
+                "kind": node.get("kind"),
+                "name": node.get("name"),
+                "urn": node.get("urn"),
+                "owner": node.get("owner"),
+                "freshness": node.get("freshness"),
+                "state": node.get("state"),
+            }
+        )
+    raw_lineage = evidence.get("lineage")
+    lineage = None
+    if raw_lineage is not None:
+        lineage = {
+            "runUrn": raw_lineage.get("runUrn"),
+            "inputs": list(raw_lineage.get("inputs") or []),
+            "outputs": list(raw_lineage.get("outputs") or []),
+            "modelTrainingJobs": list(raw_lineage.get("modelTrainingJobs") or []),
+            "modelDeployments": list(raw_lineage.get("modelDeployments") or []),
+        }
+    return {
+        "model": evidence.get("model"),
+        "nodes": nodes,
+        "rollbackRunbook": evidence.get("rollbackRunbook"),
+        "lineage": lineage,
+        "gaps": gap_ids,
+    }
+
+
 def days_between(start: str | None, end: str | None) -> int | None:
     try:
         first = datetime.fromisoformat((start or "").replace("Z", "+00:00")).date()
@@ -219,7 +252,7 @@ def build_receipt(evidence: dict[str, Any], today: str) -> dict[str, Any]:
         gaps.append({"id": "stale-feature", "title": "Stale feature freshness", "detail": f"Feature set freshness is {feature['freshness']}; it is older than 7 days."})
     if not evidence.get("rollbackRunbook"):
         gaps.append({"id": "no-rollback", "title": "No rollback runbook", "detail": "No rollback runbook is linked to the production deployment."})
-    canonical = json.dumps({"model": evidence["model"], "gaps": [gap["id"] for gap in gaps]}, separators=(",", ":"))
+    canonical = json.dumps(canonical_payload(evidence, [gap["id"] for gap in gaps]), ensure_ascii=False, separators=(",", ":"))
     digest = stable_fingerprint(canonical)
     return {"verdict": "REPAIR" if gaps else "APPROVE", "gaps": gaps, "digest": digest, "receiptId": f"LR-{digest[:6].upper()}"}
 

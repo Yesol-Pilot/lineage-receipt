@@ -1,10 +1,10 @@
 # LineageReceipt
 
-An evidence-first ML release agent for OpenAI Build Week 2026 (Developer Tools), built with Codex and GPT-5.6. It reads a model's DataHub lineage, blocks incomplete releases, and produces a cryptographic SHA-256 digest over the canonical decision payload before writing decision provenance back to DataHub. The same public artifact was also prepared for the DataHub Agent Hackathon; this page makes the current OpenAI Build Week identity and evidence path explicit.
+An evidence-first ML release agent for OpenAI Build Week 2026 (Developer Tools), built with Codex and GPT-5.6. It reads a model's DataHub lineage, blocks incomplete releases, and produces a cryptographic SHA-256 digest over a canonical evidence snapshot plus the resulting gap IDs before writing decision provenance back to DataHub. The same public artifact was also prepared for the DataHub Agent Hackathon; this page makes the current OpenAI Build Week identity and evidence path explicit.
 
 ## Current proof
 
-`engine/release-audit.mjs` is a deterministic release rule engine. `scripts/datahub_roundtrip.py` uses the official DataHub SDK to upsert a synthetic ML graph, read its lineage, compute the same SHA-256 digest over the canonical decision payload, and persist the decision as ML model custom properties. Missing or invalid freshness evidence fails closed as `REPAIR`; the committed fixture is covered by an engine-consistency test. No production credentials are stored in this repository.
+`engine/release-audit.mjs` is a deterministic release rule engine. `scripts/datahub_roundtrip.py` uses the official DataHub SDK to upsert a synthetic ML graph, read its lineage, compute the same SHA-256 digest over the canonical evidence snapshot plus decision gaps, and persist the decision as ML model custom properties. Missing or invalid freshness evidence fails closed as `REPAIR`; the committed fixture is covered by cross-engine consistency and digest-binding tests. No production credentials are stored in this repository.
 
 ## Run
 
@@ -58,7 +58,7 @@ approval.
 For judges, the fastest path is:
 
 1. Open the live demo at <https://016lineage-receipt.vercel.app>.
-2. On the repaired candidate, inspect the four DataHub URNs and the `REPAIR / LR-46633A` SHA-256 receipt. The public URL is updated only after the independent review and redeploy readback gates pass.
+2. On the repaired candidate, inspect the four DataHub URNs and the `REPAIR / LR-DC2240` SHA-256 receipt. The public URL is updated only after the independent review and redeploy readback gates pass.
 3. Run `npm test` and `npm run build` locally.
 4. Run `python scripts/datahub_roundtrip.py --write-decision` against a local
    DataHub Quickstart to reproduce the lineage read and decision write-back.
