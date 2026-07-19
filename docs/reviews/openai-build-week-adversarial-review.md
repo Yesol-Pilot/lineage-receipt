@@ -14,11 +14,11 @@ Review mode: cold-judge replay and evidence readback; the repaired candidate rec
 | --- | --- | --- |
 | Repaired candidate | Local candidate renders the four-node DataHub chain and `REPAIR / LR-DC2240` with an evidence-bound SHA-256 receipt | PASS_CANDIDATE |
 | Public demo readback | [live demo](https://016lineage-receipt.vercel.app) remains on the superseded pre-repair `LR-2842C6` until the independent PASS gate | PENDING_REDEPLOY |
-| Public source and license | [GitHub repository](https://github.com/Yesol-Pilot/lineage-receipt), Apache-2.0 `LICENSE` | PASS |
-| Judge setup path | `README.md` plus pinned `requirements.txt` and npm lockfile | PASS |
-| Codex/GPT-5.6 explanation | README, project story, and narrated demo | PASS |
-| Demo length and audio | [YouTube demo](https://youtu.be/F5peo6DJD3c), 53.45 seconds, public, H.264/AAC | PASS |
-| Developer Tools installation/testing path | Devpost Additional Info and README include Node/Python/DataHub Quickstart commands | PASS |
+| Public source and license | [GitHub repository](https://github.com/Yesol-Pilot/lineage-receipt) still exposes the superseded baseline; Apache-2.0 `LICENSE` is public | PENDING_PUSH |
+| Judge setup path | Repaired local `README.md` plus pinned `requirements.txt` and npm lockfile; public README awaits push | PENDING_PUSH |
+| Codex/GPT-5.6 explanation | Repaired local README/story plus narrated demo; public text/video refresh awaits readback | BASELINE_ONLY |
+| Demo length and audio | [YouTube demo](https://youtu.be/F5peo6DJD3c), 53.45 seconds, public, H.264/AAC; receipt identity is superseded | BASELINE_ONLY |
+| Developer Tools installation/testing path | Repaired local README and Devpost Additional Info include Node/Python/DataHub Quickstart commands; public source refresh awaits push | PENDING_PUSH |
 | `/feedback` Session ID | Devpost Additional Info stores the current Codex thread ID | PASS_WITH_SEMANTIC_RISK |
 
 ## Adversarial findings
