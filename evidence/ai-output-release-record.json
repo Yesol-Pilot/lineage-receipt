@@ -114,8 +114,8 @@
       "npm test: 4/4 passed on the repaired candidate",
       "npm run build: Vite production build passed",
       "Browser CDP viewport 1920x911, button interaction verified, page_errors=[]",
-      "DataHub SDK round-trip readback: REPAIR / LR-DC2240 with persisted verdict, receipt ID, and digest equality checks",
-      "Post-submission judge setup replay: python scripts/datahub_roundtrip.py --write-decision returned four URNs, three explicit REPAIR gaps, and DataHub property readback REPAIR / LR-DC2240",
+      "Fixture and local JS/Python engines produce REPAIR / LR-DC2240; the round-trip command now checks persisted verdict, receipt ID, and digest equality",
+      "Prior DataHub replay proved four URNs and three explicit REPAIR gaps; a fresh SDK round-trip for LR-DC2240 is pending remote verification before public redeploy",
       "Remote cold-start verification on Windows: npm ci, npm test 4/4, Vite build, npm audit 0 high vulnerabilities, and Python safety/fixture tests 3/3",
       "Candidate c7012bb preserves the actionable evidence navigation and Fit to view controls and adds cross-engine evidence-bound digest regression tests; remote verification is pending",
       "Cold-judge adversarial review artifact records resolved setup and dependency-drift findings plus the remaining session-ID semantic and competitive-outcome risks",
@@ -127,7 +127,7 @@
       "ClaudeNeo independent re-review transcript preserved internally: REPAIR / 82; code blockers closed and public redeploy/readback pending"
     ],
     "remaining_defects": [
-      "Re-review the repaired local commit before public push/deploy; current public demo still reflects the superseded digest until that gate passes."
+      "Freshly verify the c835eb1 DataHub round-trip and independent Claude verdict before public push/deploy; current public demo still reflects the superseded digest until those gates pass."
     ]
   },
   "openai_build_week_submission": {
