@@ -2,14 +2,24 @@ import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import datahubProof from '../evidence-datahub-roundtrip.json';
 import './styles.css';
+import './nav-overrides.css';
 
 const { evidence, receipt: result } = datahubProof;
 
 function App() {
   const [written, setWritten] = useState(false);
+  const [activePanel, setActivePanel] = useState('evidence');
+  const focusEvidence = () => {
+    setActivePanel('evidence');
+    document.querySelector('.lineage')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+  const focusDecision = () => {
+    setActivePanel('decision');
+    document.querySelector('.decision')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
   return <main className="app-shell">
-    <aside><div className="brand">LineageReceipt</div><nav><a className="active">⌘&nbsp; Model release evidence</a><a>▣&nbsp; Release decisions</a></nav><div className="side-foot">DataHub adapter<br/>local demo</div></aside>
-    <section className="workspace"><header><div><h1>Model release evidence</h1><p>Audit DataHub lineage evidence and verify the decision write-back.</p></div><button className="quiet">⌗&nbsp; Fit to view</button></header>
+    <aside><div className="brand">LineageReceipt</div><nav><button type="button" className={activePanel === 'evidence' ? 'active' : ''} onClick={focusEvidence} aria-current={activePanel === 'evidence' ? 'page' : undefined}>⌘&nbsp; Model release evidence</button><button type="button" className={activePanel === 'decision' ? 'active' : ''} onClick={focusDecision} aria-current={activePanel === 'decision' ? 'page' : undefined}>▣&nbsp; Release decisions</button></nav><div className="side-foot">DataHub adapter<br/>local demo</div></aside>
+    <section className="workspace"><header><div><h1>Model release evidence</h1><p>Audit DataHub lineage evidence and verify the decision write-back.</p></div><button type="button" className="quiet" onClick={focusEvidence}>⌗&nbsp; Fit to view</button></header>
       <div className="lineage">{evidence.nodes.map((node, index) => <React.Fragment key={node.urn}><article className={'node '+node.state.toLowerCase()}><span className="kind">{node.kind}</span><h2>{node.name}</h2><code>{node.urn}</code><dl><dt>owner</dt><dd>{node.owner || <b>missing</b>}</dd><dt>freshness</dt><dd>{node.freshness}</dd><dt>status</dt><dd>{node.state}</dd></dl></article>{index < evidence.nodes.length - 1 && <div className="edge" aria-label="lineage connection">→</div>}</React.Fragment>)}</div>
       <footer>⌘&nbsp; DataHub lineage read &nbsp;•&nbsp; decision provenance write-back verified</footer>
     </section>
