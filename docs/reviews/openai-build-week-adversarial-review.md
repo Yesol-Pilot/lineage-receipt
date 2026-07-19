@@ -41,7 +41,7 @@ Technical compliance is not a prize guarantee. The independent Claude review mus
 
 ### F5 — Independent Claude repair targets (in progress)
 
-The first independent review identified fail-open freshness handling, a misleading padded FNV-1a digest, missing fixture-to-engine binding, and stale dual-hackathon/video identity text. The local repair changes fail closed on freshness, use SHA-256 in both engines, add a fixture-consistency test, and reconcile README/evidence metadata. The second independent review closed those code blockers; public push/deploy/readback remains explicitly pending.
+The first independent review identified fail-open freshness handling, a misleading padded FNV-1a digest, missing fixture-to-engine binding, and stale dual-hackathon/video identity text. The local repair changes fail closed on freshness, use SHA-256 in both engines, add a fixture-consistency test, and reconcile README/evidence metadata. A follow-up candidate commit `94a6cf3` also makes the evidence navigation and `Fit to view` controls actionable. The second independent review closed the original code blockers; public push/deploy/readback remains explicitly pending.
 
 ## Evidence commands
 
