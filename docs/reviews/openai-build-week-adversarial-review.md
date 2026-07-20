@@ -14,7 +14,7 @@ Review mode: cold-judge replay and evidence readback; the independent ClaudeNeo 
 | --- | --- | --- |
 | Repaired candidate | `f28ef46` renders the four-node DataHub chain and `REPAIR / LR-DC2240` with an evidence-bound SHA-256 receipt | PASS |
 | Public demo readback | [live demo](https://016lineage-receipt.vercel.app) renders four DataHub URNs and `REPAIR / LR-DC2240`; old `LR-2842C6` is absent | PASS |
-| Public source and license | [GitHub repository](https://github.com/Yesol-Pilot/lineage-receipt) is at public HEAD `0086589`; Apache-2.0 `LICENSE` is public | PASS |
+| Public source and license | [GitHub repository](https://github.com/Yesol-Pilot/lineage-receipt) contains the public application/assets commit `e7259a3` plus the final audit record; Apache-2.0 `LICENSE` is public | PASS |
 | Judge setup path | Public README, current live screenshot, pinned `requirements.txt`, npm lockfile, and Devpost Additional Info contain Node/Python/DataHub Quickstart commands | PASS |
 | Codex/GPT-5.6 explanation | Public README/story and the refreshed narrated demo identify Codex and GPT-5.6 collaboration | PASS |
 | Demo length and audio | [YouTube demo](https://youtu.be/8LXw5IlHrzU), ~69 seconds, public H.264/AAC; title and receipt `LR-DC2240` read back via oEmbed | PASS |
@@ -52,6 +52,6 @@ npm audit --omit=dev --audit-level=high
 python scripts/datahub_roundtrip.py --write-decision
 ```
 
-Local execution evidence was captured at `f28ef46`: `D:\00.test\010.tmp-output\lineagereceipt-verification\f28ef46-npm-test.txt` (5/5), `f28ef46-python-test.txt` (4/4), `f28ef46-vite-build.txt`, `f28ef46-npm-audit.txt`, and `f28ef46-datahub-roundtrip.txt` (exit 0 with persisted digest equality). Public docs and the judge screenshot are now at GitHub HEAD `0086589`; the same screenshot is visible in the Devpost image gallery.
+Local execution evidence was captured at `f28ef46`: `D:\00.test\010.tmp-output\lineagereceipt-verification\f28ef46-npm-test.txt` (5/5), `f28ef46-python-test.txt` (4/4), `f28ef46-vite-build.txt`, `f28ef46-npm-audit.txt`, and `f28ef46-datahub-roundtrip.txt` (exit 0 with persisted digest equality). The public README/assets are at application commit `e7259a3`; the same screenshot is visible in the Devpost image gallery.
 
 Official reference: [OpenAI Build Week rules](https://openai.devpost.com/rules).
