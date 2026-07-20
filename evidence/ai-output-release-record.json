@@ -123,7 +123,7 @@
       "69.4-second narrated H.264/AAC MP4 readback (under the 3-minute rule); YouTube 8LXw5IlHrzU oEmbed readback returned the current title and public author",
       "Public Vercel CDP readback rendered LR-DC2240 with the full four-node chain and no superseded LR-2842C6",
       "OpenAI Devpost public readback: Project submitted!, Developer Tools, current live demo/repository links, LR-DC2240 story text, YouTube iframe 8LXw5IlHrzU, and live evidence screenshot with caption",
-      "GitHub raw README and screenshot readback returned HTTP 200 at public HEAD e7259a3"
+      "GitHub raw README and screenshot readback returned HTTP 200 at public HEAD 0086589"
     ],
     "independent_review_evidence": [
       "Codex final-validator review against current DataHub hackathon rules and AI-output release policy",
