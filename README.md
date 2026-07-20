@@ -6,6 +6,10 @@ An evidence-first ML release agent for OpenAI Build Week 2026 (Developer Tools),
 
 `engine/release-audit.mjs` is a deterministic release rule engine. `scripts/datahub_roundtrip.py` uses the official DataHub SDK to upsert a synthetic ML graph, read its lineage, compute the same SHA-256 digest over the canonical evidence snapshot plus decision gaps, and persist the decision as ML model custom properties. Missing or invalid freshness evidence fails closed as `REPAIR`; the committed fixture is covered by cross-engine consistency and digest-binding tests. No production credentials are stored in this repository.
 
+![LineageReceipt live evidence console](docs/assets/lineagereceipt-live.png)
+
+The screenshot is the current public evidence console: four DataHub URNs lead to the intentional `REPAIR / LR-DC2240` result, three named evidence gaps, and the matching SHA-256 receipt. It is a product readback, not a mock marketing graphic.
+
 ## Run
 
 ```bash
@@ -58,7 +62,7 @@ approval.
 For judges, the fastest path is:
 
 1. Open the live demo at <https://016lineage-receipt.vercel.app>.
-2. On the repaired candidate, inspect the four DataHub URNs and the `REPAIR / LR-DC2240` SHA-256 receipt. The public URL is updated only after the independent review and redeploy readback gates pass.
+2. Read the four URNs, the three explicit gaps, and the `REPAIR / LR-DC2240` SHA-256 receipt. The `REPAIR` state is intentional: the tool refuses to approve missing owner, stale freshness, or absent rollback evidence.
 3. Run `npm test` and `npm run build` locally.
 4. Run `python scripts/datahub_roundtrip.py --write-decision` against a local
    DataHub Quickstart to reproduce the lineage read and decision write-back;
