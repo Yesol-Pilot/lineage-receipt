@@ -77,7 +77,7 @@
     ],
     "likeness_or_voice_consent_evidence": [],
     "open_issues": [
-      "The official mcp-server-datahub package launches and reaches MCP initialization, but the current PC has no live DataHub GMS at the configured local endpoint; the official end-to-end MCP readback remains UNVERIFIED until Quickstart is healthy.",
+      "The official mcp-server-datahub package now reaches the live local DataHub GMS at 127.0.0.1:18080; after parsing DataHub lineage facets, the official end-to-end readback is MCP_READ_SUCCESS_WITH_WARNINGS with only modelDeployments as an explicit fallback, receipt LR-520F80, and stdout preserved in D:\\00.test\\010.tmp-output\\lineage-receipt-verification\\20260721-datahub-mcp-official-live-v5.stdout.json (stderr is separate).",
       "The first repository commit is 2026-07-19, inside the DataHub submission period; the earlier OpenAI Build Week submission is disclosed and the DataHub MCP adapter is new work in that period."
     ]
   },
@@ -123,10 +123,11 @@
       "Vite build and npm audit at HEAD f28ef46 passed; logs preserved in the lineagereceipt-verification folder",
       "Remote cold-start verification on Windows: npm ci, npm test 4/4, Vite build, npm audit 0 high vulnerabilities, and Python safety/fixture tests 3/3",
       "Cold-judge adversarial review artifact records resolved setup and dependency-drift findings plus the remaining session-ID semantic and competitive-outcome risks",
-      "DataHub MCP adapter pure tests: 6/6 passed; the isolated official mcp-server-datahub==0.6.0 environment reported no broken requirements",
+      "DataHub MCP adapter pure tests: 7/7 passed after lineage-facet parsing; the isolated official mcp-server-datahub==0.6.0 environment reported no broken requirements",
       "Official MCP server preflight: package launched and registered read-only tools, then failed only because the local DataHub GMS endpoint refused the connection; stdout is preserved in D:\\00.test\\010.tmp-output\\lineage-receipt-verification\\20260721-datahub-mcp-server-preflight2.stdout.json",
       "MCP transport proof with a deterministic stdio test server: MCP_READ_SUCCESS, REPAIR / LR-4BFBA6, get_entities plus upstream/downstream get_lineage (3 calls), fallback 0; stdout is preserved in D:\\00.test\\010.tmp-output\\lineage-receipt-verification\\20260721-datahub-mcp-transport5.stdout.json",
-      "MCP replay fixture binding test: 1/1 passed at local HEAD 57574f6; scripts/test_datahub_mcp_replay_fixture.py binds MCP_READ_SUCCESS, liveGms=false, three tool calls, result hashes, disclosure text, and receipt LR-4BFBA6",
+      "Official live MCP readback: MCP_READ_SUCCESS_WITH_WARNINGS, source official mcp-server-datahub, protocol 2025-11-25, server datahub 3.4.4, get_entities plus upstream/downstream get_lineage (3 calls), inputs/outputs parsed from DataHub lineage facets, only modelDeployments fallback, REPAIR / LR-520F80; stdout is preserved in D:\\00.test\\010.tmp-output\\lineage-receipt-verification\\20260721-datahub-mcp-official-live-v5.stdout.json",
+      "MCP replay fixture binding test: 1/1 passed after official live parser update; scripts/test_datahub_mcp_replay_fixture.py binds MCP_READ_SUCCESS_WITH_WARNINGS, liveGms=true, official server identity, three tool calls, result hashes, single fallback disclosure, and receipt LR-520F80",
       "69.4-second narrated H.264/AAC MP4 readback (under the 3-minute rule); YouTube 8LXw5IlHrzU oEmbed readback returned the current title and public author",
       "Public Vercel CDP readback rendered LR-DC2240 with the full four-node chain and no superseded LR-2842C6",
       "OpenAI Devpost public readback: Project submitted!, Developer Tools, current live demo/repository links, LR-DC2240 story text, YouTube iframe 8LXw5IlHrzU, and live evidence screenshot with caption",
@@ -136,10 +137,10 @@
       "Codex final-validator review against current DataHub hackathon rules and AI-output release policy",
       "ClaudeNeo independent re-review transcript preserved internally: PASS / 85 with no blockers; stdout at D:\\00.test\\010.tmp-output\\claudeneo-reviews\\lineage-receipt-independent-re-review3-20260719-215003.txt",
       "ClaudeNeo current DataHub review at local HEAD be88d7f: REPAIR / 52; stdout at D:\\00.test\\010.tmp-output\\claudeneo-reviews\\lineage-receipt-datahub-re-review-be88d7f.stdout.txt",
-      "ClaudeNeo current DataHub review remains REPAIR because origin is still 31433c7 and official live GMS MCP readback is absent; local binding-test commit is 57574f6"
+      "ClaudeNeo current DataHub review at ad0f6d8 was REPAIR / 60 on static-only evidence; official live stdout now closes the GMS blocker, but a fresh execution-backed review is still required before public write"
     ],
     "remaining_defects": [
-      "Live official DataHub MCP round-trip is still gated on a healthy local Quickstart/GMS service; do not claim the DataHub-specific proof complete or submit a public update until that stdout artifact exists."
+      "Official live DataHub MCP readback is now captured with explicit fallback warnings; do not claim award readiness or perform public write until the current-head ClaudeNeo review reads this live fixture and returns an execution-backed PASS."
     ]
   },
   "openai_build_week_submission": {

@@ -6,6 +6,7 @@ from datahub_mcp_audit import (
     flatten_custom_properties,
     lineage_process_urns,
     lineage_result_urns,
+    lineage_facet_urns,
     parse_server_spec,
     stable_sha256,
     unwrap_tool_result,
@@ -48,6 +49,13 @@ class McpAdapterTests(unittest.TestCase):
         self.assertEqual(lineage_result_urns(lineage, "downstreams"), ["urn:output"])
         lineage["upstreams"]["searchResults"].append({"entity": {"urn": "urn:li:dataProcessInstance:run"}})
         self.assertEqual(lineage_process_urns(lineage), ["urn:li:dataProcessInstance:run"])
+
+        lineage["upstreams"]["facets"] = [
+            {"field": "inputs", "aggregations": [{"entity": {"urn": "urn:facet-input"}}]},
+            {"field": "outputs", "aggregations": [{"entity": {"urn": "urn:facet-output"}}]},
+        ]
+        self.assertEqual(lineage_facet_urns(lineage, "upstreams", "inputs"), ["urn:facet-input"])
+        self.assertEqual(lineage_facet_urns(lineage, "upstreams", "outputs"), ["urn:facet-output"])
 
     def test_mcp_evidence_binds_readback_and_preserves_repair(self):
         fixture = {

@@ -1,26 +1,39 @@
 {
-  "source": "MCP transport override",
-  "status": "MCP_READ_SUCCESS",
-  "liveGms": false,
+  "source": "official mcp-server-datahub",
+  "status": "MCP_READ_SUCCESS_WITH_WARNINGS",
+  "liveGms": true,
+  "serverCommand": [
+    "uvx",
+    "mcp-server-datahub@0.6.0"
+  ],
+  "protocolVersion": "2025-11-25",
+  "serverInfo": {
+    "name": "datahub",
+    "version": "3.4.4"
+  },
   "toolCalls": [
     {
       "name": "get_entities",
-      "resultSha256": "c2fc23191f625e85de7861493c28d93341d1abddbbcba1f951e439a332f9ebf2"
+      "resultSha256": "e2704e5a48ea10bac3fe83a974085e0812b5b2cd6e33119e3721dd1c0a4299ed"
     },
     {
       "name": "get_lineage",
       "direction": "upstream",
-      "resultSha256": "2779176ecc55ec14ebb3faee9dd55ea9c586d03edd39dda12f0583a3f7c59097"
+      "resultSha256": "fe40474e3120c76d2d65f00c229a26b5183e5ae9219aacd4b40fa72bf59caaa9"
     },
     {
       "name": "get_lineage",
       "direction": "downstream",
-      "resultSha256": "2779176ecc55ec14ebb3faee9dd55ea9c586d03edd39dda12f0583a3f7c59097"
+      "resultSha256": "b0823857ec1ed5bd4e97bfaffd24a20e7dc4405404fe74bb0af079bbe7754da6"
     }
+  ],
+  "lineageFallbackFields": [
+    "modelDeployments"
   ],
   "receipt": {
     "verdict": "REPAIR",
-    "receiptId": "LR-4BFBA6"
+    "receiptId": "LR-520F80",
+    "digest": "520f800c7496cd7d013a7adb18fd0c5e387ddddb3170b242c064012a1f71eaf2"
   },
-  "disclosure": "Deterministic stdio transport proof only; run scripts/datahub_mcp_audit.py against a healthy official DataHub GMS for live evidence."
+  "disclosure": "Live official DataHub GMS MCP readback from 127.0.0.1:18080 using the pinned mcp-server-datahub@0.6.0. Status is MCP_READ_SUCCESS_WITH_WARNINGS because modelDeployments is explicitly a fixture-fallback field; inputs and outputs are parsed from DataHub lineage facets. The receipt remains REPAIR and no approval is claimed."
 }

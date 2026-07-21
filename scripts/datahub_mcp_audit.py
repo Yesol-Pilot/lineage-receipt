@@ -169,6 +169,23 @@ def lineage_result_urns(payload: Any, direction: str) -> list[str]:
     return urns
 
 
+def lineage_facet_urns(payload: Any, direction: str, field: str) -> list[str]:
+    """Extract entity URNs from DataHub's lineage facet aggregations."""
+    section = payload.get(direction, {}) if isinstance(payload, dict) else {}
+    facets = section.get("facets", []) if isinstance(section, dict) else []
+    urns: list[str] = []
+    for facet in facets if isinstance(facets, list) else []:
+        if not isinstance(facet, dict) or facet.get("field") != field:
+            continue
+        aggregations = facet.get("aggregations", [])
+        for aggregation in aggregations if isinstance(aggregations, list) else []:
+            entity = aggregation.get("entity") if isinstance(aggregation, dict) else None
+            urn = entity.get("urn") if isinstance(entity, dict) else None
+            if urn and urn not in urns:
+                urns.append(str(urn))
+    return urns
+
+
 def lineage_process_urns(payload: Any) -> list[str]:
     """Extract process-instance URNs when the GMS exposes them in lineage."""
     all_urns = lineage_result_urns(payload, "upstreams") + lineage_result_urns(payload, "downstreams")
@@ -226,8 +243,10 @@ def build_mcp_evidence(
     mcp_model_deployments = [urn for urn in downstreams if urn.startswith("urn:li:mlModelDeployment:")]
     fixture_lineage = fixture_evidence.get("lineage") or {}
     lineage_fallback_fields: list[str] = []
-    mcp_inputs = [urn for urn in upstreams if not urn.startswith("urn:li:dataProcessInstance:")]
-    mcp_outputs = [urn for urn in downstreams if not urn.startswith("urn:li:dataProcessInstance:")]
+    facet_inputs = lineage_facet_urns(lineage_payload, "upstreams", "inputs")
+    facet_outputs = lineage_facet_urns(lineage_payload, "upstreams", "outputs")
+    mcp_inputs = [urn for urn in (facet_inputs or upstreams) if not urn.startswith("urn:li:dataProcessInstance:")]
+    mcp_outputs = [urn for urn in (facet_outputs or downstreams) if not urn.startswith("urn:li:dataProcessInstance:")]
     inputs = mcp_inputs or list(fixture_lineage.get("inputs") or [])
     outputs = mcp_outputs or list(fixture_lineage.get("outputs") or [])
     if not mcp_inputs and fixture_lineage.get("inputs"):
