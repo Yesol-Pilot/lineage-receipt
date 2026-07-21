@@ -76,7 +76,10 @@
       "https://www.apache.org/licenses/LICENSE-2.0.txt"
     ],
     "likeness_or_voice_consent_evidence": [],
-    "open_issues": []
+    "open_issues": [
+      "The official mcp-server-datahub package launches and reaches MCP initialization, but the current PC has no live DataHub GMS at the configured local endpoint; the official end-to-end MCP readback remains UNVERIFIED until Quickstart is healthy.",
+      "The first repository commit is 2026-07-19, inside the DataHub submission period; the earlier OpenAI Build Week submission is disclosed and the DataHub MCP adapter is new work in that period."
+    ]
   },
   "disclosure_assessment": {
     "actor_role": "Ordinary AI-assisted tool user and editor submitting an open-source code/UI project.",
@@ -120,6 +123,9 @@
       "Vite build and npm audit at HEAD f28ef46 passed; logs preserved in the lineagereceipt-verification folder",
       "Remote cold-start verification on Windows: npm ci, npm test 4/4, Vite build, npm audit 0 high vulnerabilities, and Python safety/fixture tests 3/3",
       "Cold-judge adversarial review artifact records resolved setup and dependency-drift findings plus the remaining session-ID semantic and competitive-outcome risks",
+      "DataHub MCP adapter pure tests: 6/6 passed; the isolated official mcp-server-datahub==0.6.0 environment reported no broken requirements",
+      "Official MCP server preflight: package launched and registered read-only tools, then failed only because the local DataHub GMS endpoint refused the connection; stdout is preserved in D:\\00.test\\010.tmp-output\\lineage-receipt-verification\\20260721-datahub-mcp-server-preflight2.stdout.json",
+      "MCP transport proof with a deterministic stdio test server: MCP_READ_SUCCESS, REPAIR / LR-4BFBA6, get_entities plus upstream/downstream get_lineage (3 calls), fallback 0; stdout is preserved in D:\\00.test\\010.tmp-output\\lineage-receipt-verification\\20260721-datahub-mcp-transport5.stdout.json",
       "69.4-second narrated H.264/AAC MP4 readback (under the 3-minute rule); YouTube 8LXw5IlHrzU oEmbed readback returned the current title and public author",
       "Public Vercel CDP readback rendered LR-DC2240 with the full four-node chain and no superseded LR-2842C6",
       "OpenAI Devpost public readback: Project submitted!, Developer Tools, current live demo/repository links, LR-DC2240 story text, YouTube iframe 8LXw5IlHrzU, and live evidence screenshot with caption",
@@ -129,7 +135,9 @@
       "Codex final-validator review against current DataHub hackathon rules and AI-output release policy",
       "ClaudeNeo independent re-review transcript preserved internally: PASS / 85 with no blockers; stdout at D:\\00.test\\010.tmp-output\\claudeneo-reviews\\lineage-receipt-independent-re-review3-20260719-215003.txt"
     ],
-    "remaining_defects": []
+    "remaining_defects": [
+      "Live official DataHub MCP round-trip is still gated on a healthy local Quickstart/GMS service; do not claim the DataHub-specific proof complete or submit a public update until that stdout artifact exists."
+    ]
   },
   "openai_build_week_submission": {
     "hackathon": "OpenAI Build Week 2026",

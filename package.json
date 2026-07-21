@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "test": "node --test",
-    "datahub:roundtrip": "python scripts/datahub_roundtrip.py --write-decision"
+    "datahub:roundtrip": "python scripts/datahub_roundtrip.py --write-decision",
+    "datahub:mcp-audit": "python scripts/datahub_mcp_audit.py",
+    "test:datahub-mcp": "python scripts/test_datahub_mcp_audit.py"
   },
   "dependencies": {
     "@vitejs/plugin-react": "6.0.3",

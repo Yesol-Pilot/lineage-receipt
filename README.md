@@ -1,6 +1,6 @@
 # LineageReceipt
 
-An evidence-first ML release agent for OpenAI Build Week 2026 (Developer Tools), built with Codex and GPT-5.6. It reads a model's DataHub lineage, blocks incomplete releases, and produces a cryptographic SHA-256 digest over a canonical evidence snapshot plus the resulting gap IDs before writing decision provenance back to DataHub. The same public artifact was also prepared for the DataHub Agent Hackathon; this page makes the current OpenAI Build Week identity and evidence path explicit.
+An evidence-first ML release agent for OpenAI Build Week 2026 (Developer Tools) and the DataHub Agent Hackathon, built with Codex and GPT-5.6. It reads a model's DataHub lineage, blocks incomplete releases, and produces a cryptographic SHA-256 digest over a canonical evidence snapshot plus the resulting gap IDs before writing decision provenance back to DataHub. The DataHub entry uses the official `mcp-server-datahub` over MCP stdio for the read path; the pre-existing OpenAI submission and synthetic-fixture boundary are disclosed below.
 
 ## Current proof
 
@@ -46,6 +46,48 @@ The supported judge path is a local DataHub Quickstart on a modern desktop
 browser with Docker available. No account credentials are needed for the
 synthetic fixture; the CLI token is stored in the user's local DataHub config,
 never in this repository.
+
+## DataHub Agent Hackathon MCP proof
+
+The DataHub-specific path is a real MCP client call, not a README claim:
+`scripts/datahub_mcp_audit.py` starts the official `mcp-server-datahub`
+process, checks that `get_entities` and `get_lineage` are advertised, reads all
+fixture URNs through those tools, hashes each tool response, and feeds the
+readback into the same deterministic receipt engine. DataHub versions that do
+not expose process-instance aspects report the exact fallback fields; missing
+entities or a missing server remain visible as
+`MCP_READ_SUCCESS_WITH_WARNINGS` or `MCP_UNVERIFIED` and never become an
+approval.
+
+Install the pinned server dependency in the same virtual environment as the
+SDK, then run the MCP proof after DataHub Quickstart is healthy:
+
+```powershell
+python -m pip install -r requirements.txt
+datahub docker quickstart
+# Set DATAHUB_GMS_URL and DATAHUB_GMS_TOKEN from your local Quickstart config.
+python scripts/datahub_roundtrip.py --write-decision
+python scripts/datahub_mcp_audit.py > mcp-audit.stdout.json
+```
+
+The last command launches `uvx mcp-server-datahub@0.6.0` itself as the MCP
+subprocess, so the judge can reproduce the exact protocol boundary. If the package is installed as a
+console script instead, use
+`python scripts/datahub_mcp_audit.py --server-command mcp-server-datahub`.
+The output is the evidence artifact: it includes the server handshake, the
+advertised tool list, per-call response hashes, the MCP-derived lineage, and
+the resulting `REPAIR` receipt. No token is printed or committed.
+
+### Eligibility and category
+
+The first repository commit is dated 2026-07-19, within the DataHub
+submission period that began 2026-07-06. The earlier OpenAI Build Week entry is
+disclosed rather than hidden; the DataHub-specific MCP adapter and proof path
+are new work in this submission period. We target the **Production ML Agents**
+category because the agent makes a release decision from model lineage and
+evidence, rather than merely displaying metadata. See the official
+[DataHub hackathon rules](https://datahub.devpost.com/rules) for the new-project,
+Apache-2.0, public-demo, and category requirements.
 
 Licensed under Apache-2.0.
 
