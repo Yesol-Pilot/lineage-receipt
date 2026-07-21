@@ -1,0 +1,26 @@
+{
+  "source": "MCP transport override",
+  "status": "MCP_READ_SUCCESS",
+  "liveGms": false,
+  "toolCalls": [
+    {
+      "name": "get_entities",
+      "resultSha256": "c2fc23191f625e85de7861493c28d93341d1abddbbcba1f951e439a332f9ebf2"
+    },
+    {
+      "name": "get_lineage",
+      "direction": "upstream",
+      "resultSha256": "2779176ecc55ec14ebb3faee9dd55ea9c586d03edd39dda12f0583a3f7c59097"
+    },
+    {
+      "name": "get_lineage",
+      "direction": "downstream",
+      "resultSha256": "2779176ecc55ec14ebb3faee9dd55ea9c586d03edd39dda12f0583a3f7c59097"
+    }
+  ],
+  "receipt": {
+    "verdict": "REPAIR",
+    "receiptId": "LR-4BFBA6"
+  },
+  "disclosure": "Deterministic stdio transport proof only; run scripts/datahub_mcp_audit.py against a healthy official DataHub GMS for live evidence."
+}
