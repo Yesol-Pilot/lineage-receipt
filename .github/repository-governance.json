@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "policyId": "ng-repo-governance/1.0.0",
+  "lifecycleClass": "service-evidence-lineage",
+  "currentOwner": "Yesol-Pilot",
+  "intendedOwner": "NeoGenesisAI",
+  "canonicalBranch": "master",
+  "canonicalBranchTarget": "main",
+  "expectedSettings": {
+    "allowSquashMerge": true,
+    "allowMergeCommit": false,
+    "allowRebaseMerge": false,
+    "deleteBranchOnMerge": true,
+    "allowUpdateBranch": true,
+    "allowAutoMerge": true
+  },
+  "fullHistorySecretScan": "UNKNOWN",
+  "dependencyAudit": "UNKNOWN",
+  "targetSurfaceEvidence": "UNKNOWN",
+  "lastReviewed": "2026-08-27"
+}
