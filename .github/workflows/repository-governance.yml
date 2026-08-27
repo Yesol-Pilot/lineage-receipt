@@ -1,0 +1,155 @@
+name: Repository Governance
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repository-governance-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  governance:
+    name: repository-governance
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check out exact revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify checkout identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${GITHUB_SHA}"
+
+      - name: Validate repository contract and tracked content
+        shell: bash
+        env:
+          REPOSITORY: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import pathlib
+          import re
+          import subprocess
+          import sys
+
+          repo = pathlib.Path('.')
+          errors: list[str] = []
+
+          contract = repo / 'REPOSITORY_GOVERNANCE.md'
+          if not contract.is_file():
+              errors.append('REPOSITORY_GOVERNANCE.md is missing')
+          else:
+              text = contract.read_text(encoding='utf-8', errors='replace')
+              if 'ng-repo-governance/1.0.0' not in text:
+                  errors.append('repository contract does not identify policy ng-repo-governance/1.0.0')
+              normalized = text.replace('`', '').lower()
+              if 'unknown' not in normalized or 'must never be reported as pass' not in normalized:
+                  errors.append('repository contract does not define UNKNOWN as non-PASS')
+              if 'presence of this file alone' not in normalized:
+                  errors.append('repository contract does not prohibit documentation-only compliance')
+
+          tracked = subprocess.check_output(
+              ['git', 'ls-files', '-z'], text=False
+          ).split(b'\0')
+          tracked_paths = [p.decode('utf-8', errors='surrogateescape') for p in tracked if p]
+
+          allowed_env_names = {
+              '.env.example', '.env.sample', '.env.template', '.env.local.example'
+          }
+          forbidden_names = {
+              'credentials.json', 'service-account.json', 'service_account.json',
+              'cookies.json', 'session.json', 'oauth.json', 'token.json'
+          }
+          forbidden_suffixes = (
+              '.pem', '.p12', '.pfx', '.keystore', '.jks', '.mobileprovision'
+          )
+          generated_parts = {
+              'node_modules', '__pycache__', '.venv', 'venv', '.next',
+              'coverage', 'Library', 'Temp', 'obj', '.gradle'
+          }
+
+          for raw in tracked_paths:
+              path = pathlib.PurePosixPath(raw)
+              name = path.name
+              parts = set(path.parts)
+              if name == '.env' or (name.startswith('.env.') and name not in allowed_env_names):
+                  errors.append(f'prohibited environment file is tracked: {raw}')
+              if name in forbidden_names or name.endswith(forbidden_suffixes):
+                  errors.append(f'prohibited credential or signing file is tracked: {raw}')
+              if parts & generated_parts:
+                  errors.append(f'generated or dependency directory is tracked: {raw}')
+
+          secret_patterns = [
+              ('GitHub classic token', re.compile(r'gh[pousr]_[A-Za-z0-9]{36,}')),
+              ('GitHub fine-grained token', re.compile(r'github_pat_[A-Za-z0-9_]{40,}')),
+              ('OpenAI secret key', re.compile(r'sk-(?:proj-)?[A-Za-z0-9_-]{20,}')),
+              ('AWS access key', re.compile(r'AKIA[0-9A-Z]{16}')),
+              ('Google API key', re.compile(r'AIza[0-9A-Za-z_-]{35}')),
+              ('Slack token', re.compile(r'xox[baprs]-[0-9A-Za-z-]{20,}')),
+              ('Stripe live secret', re.compile(r'sk_live_[0-9A-Za-z]{16,}')),
+              ('Private key header', re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----')),
+          ]
+          text_extensions = {
+              '.txt', '.md', '.json', '.jsonc', '.yaml', '.yml', '.toml', '.ini',
+              '.env', '.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs', '.py', '.rb',
+              '.php', '.go', '.rs', '.java', '.kt', '.kts', '.cs', '.swift', '.sh',
+              '.bash', '.zsh', '.ps1', '.xml', '.html', '.css', '.scss', '.sql',
+              '.gradle', '.properties', '.conf', '.config'
+          }
+          ignored_fragments = ('REDACTED', 'EXAMPLE', 'DUMMY', 'PLACEHOLDER')
+
+          for raw in tracked_paths:
+              path = repo / raw
+              if not path.is_file() or path.stat().st_size > 2_000_000:
+                  continue
+              if path.suffix.lower() not in text_extensions and path.name not in {
+                  'Dockerfile', 'Makefile', 'Gemfile', 'Podfile'
+              }:
+                  continue
+              try:
+                  content = path.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              for line_number, line in enumerate(content.splitlines(), start=1):
+                  upper = line.upper()
+                  if any(fragment in upper for fragment in ignored_fragments):
+                      continue
+                  for label, pattern in secret_patterns:
+                      if pattern.search(line):
+                          errors.append(f'{label} pattern detected at {raw}:{line_number}')
+
+          default_branch = '${{ github.event.repository.default_branch }}'
+          approved_exceptions = {
+              'NeoGenesisAI/neomux-desktop': 'einstein/main',
+          }
+          task_prefixes = ('codex/', 'rebuild/', 'feature/', 'fix/', 'chore/', 'governance/')
+          expected_exception = approved_exceptions.get('${{ github.repository }}')
+          if expected_exception:
+              if default_branch != expected_exception:
+                  errors.append(
+                      f'documented default-branch exception drifted: expected {expected_exception}, got {default_branch}'
+                  )
+          elif default_branch.startswith(task_prefixes):
+              errors.append(f'task branch is configured as repository default: {default_branch}')
+
+          if errors:
+              for item in sorted(set(errors)):
+                  print(f'::error::{item}')
+              print(f'repository-governance failed with {len(set(errors))} unique finding(s)', file=sys.stderr)
+              raise SystemExit(1)
+
+          print('repository-governance PASS')
+          PY
